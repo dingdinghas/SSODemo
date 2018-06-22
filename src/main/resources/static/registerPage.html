@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<head>
+    <meta charset="UTF-8">
+    <title>注册页面</title>
+</head>
+<body>
+<div id="formarea">
+    <form id="loginForm" action="/register/user" method="post">
+        <div class="form-input">
+            <label class="label">用户名：</label>
+            <input type="text" name="username" value="" required="required"/>
+        </div>
+        <div class="form-input">
+            <label class="label">密码：</label>
+            <input id="password" type="password" name="password" value="" required="required"/>
+        </div>
+        <div class="form-input">
+            <label class="label">确认密码：</label>
+            <input id="repassword" type="password" name="repassword" value="" required="required" onblur="checkPassword()"/>
+        </div>
+        <div class="form-input">
+            <label class="label">手机号：</label>
+            <input id="mobile" type="text" name="mobile" value="" required="required"/>
+        </div>
+        <div class="form-input">
+            <label class="label">邮箱：</label>
+            <input id="email" type="email" name="email" value="" required="required"/>
+        </div>
+    </form>
+    <div class="buttonarea">
+        <button onclick="regisetr()"  class="submit">注册</button>
+    </div>
+
+</div>
+</body>
+<script type="text/javascript">
+    function regisetr() {
+        if (checkPassword()) {
+            $("#loginForm").submit();
+        } else {
+            alert(密码错误)
+        }
+    }
+    function checkPassword () {
+        var p = document.getElementById("password")
+        var r = document.getElementById("repassword")
+        if (p.value !== r.value) {
+            alert("密码错误")
+            return false
+        }
+        return true
+    }
+</script>
+</html>
+<style>
+    #formarea {
+        position: relative;
+        left: 60%;
+        margin-top: 10%;
+        width: 280px;
+        height: 280px;
+        border: 1px solid red;
+        padding: 20px 20px;
+    }
+    label {
+        display: inline-block;
+        width: 100px;
+        font-size: 20px;
+    }
+    .form-input{
+        margin-bottom: 20px;
+    }
+    input {
+        height: 40px;
+        width: 180px;
+        padding-left: 20px;
+    }
+    .buttonarea{
+        display: flex;
+        justify-content: space-around;
+        margin-top: 100px;
+    }
+    .submit{
+        width: 120px;
+        height: 40px;
+    }
+</style>

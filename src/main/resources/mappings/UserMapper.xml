@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.mapper.UserMapper">
+
+    <insert id="insertUser" parameterType="com.example.demo.domain.UserInfo">
+        INSERT INTO user (username,password,email,mobile,enable,create_time,modify_time) VALUES (
+          #{username},#{password},#{email},#{mobile},#{enable},NOW(),NOW()
+        )
+    </insert>
+    <select id="selectUser" parameterType="com.example.demo.domain.UserInfo" resultType="com.example.demo.domain.UserInfo">
+        SELECT * FROM user
+        <where>
+            <if test="id!=null">
+                AND id = #{id}
+            </if>
+            <if test="username!=null">
+                AND username = #{username}
+            </if>
+            <if test="password!=null">
+                AND password = #{password}
+            </if>
+            <if test="email!=null">
+                AND email = #{email}
+            </if>
+            <if test="mobile!=null">
+                AND mobile = #{mobile}
+            </if>
+        </where>
+    </select>
+ </mapper>
