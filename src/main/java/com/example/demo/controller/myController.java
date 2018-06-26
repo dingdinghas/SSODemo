@@ -13,17 +13,9 @@ import javax.servlet.http.HttpSession;
 
 @Controller
 public class myController {
-
-
-    @GetMapping("/redirectUrl")
-    public String root (HttpSession session, HttpServletRequest request, HttpServletResponse response, String url) {
-        SecurityContextImpl spring_security_context = (SecurityContextImpl) session.getAttribute("SPRING_SECURITY_CONTEXT");
-        UserInfo userInfo = (UserInfo) spring_security_context.getAuthentication().getPrincipal();
-        request.getSession().setAttribute("user", userInfo);
-        Cookie cookie = new Cookie("NToken", userInfo.getUsername().toString());
-        cookie.setPath("/");
-        cookie.setMaxAge(3600);
-        response.addCookie(cookie);
-        return "redirect:http://" + url;
+    @GetMapping("/recordUrl")
+    public String recordUrl (HttpServletRequest request,String url) {
+        request.getSession().setAttribute("url", url);
+        return "redirect:/logins?url="+url;
     }
 }

@@ -21,12 +21,12 @@ public class RegisterServiceImpl implements RegisterService {
     @Autowired
     private PasswordEncoder myPasswordEncoder;
     @Override
-    public String registerUser(UserInfo userInfo) {
+    public Long registerUser(UserInfo userInfo) {
 
         userInfo.setPassword(myPasswordEncoder.encode(userInfo.getPassword()));
         userInfo.setEnable(1);
         userMapper.insertUser(userInfo);
-        return BaseConstant.SUCCESS;
+        return userInfo.getId();
     }
 
     @Override

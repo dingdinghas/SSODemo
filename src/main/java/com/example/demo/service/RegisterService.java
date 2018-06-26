@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 
 public interface RegisterService {
 
-    String registerUser(UserInfo userInfo);
+    Long registerUser(UserInfo userInfo);
 
     String validParam(String ValidValue);
 

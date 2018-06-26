@@ -18,8 +18,6 @@ import java.io.Serializable;
 public class UserServiceImpl implements UserService, UserDetailsService,Serializable {
 
     @Autowired
-    private PasswordEncoder myPasswordEncoder;
-    @Autowired
     private UserMapper userMapper;
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

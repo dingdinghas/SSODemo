@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.example.demo.mapper.UserMapper">
 
-    <insert id="insertUser" parameterType="com.example.demo.domain.UserInfo">
+    <insert id="insertUser" parameterType="com.example.demo.domain.UserInfo" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO user (username,password,email,mobile,enable,create_time,modify_time) VALUES (
           #{username},#{password},#{email},#{mobile},#{enable},NOW(),NOW()
         )

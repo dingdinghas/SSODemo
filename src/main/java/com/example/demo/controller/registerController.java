@@ -3,6 +3,8 @@ package com.example.demo.controller;
 import com.example.demo.domain.UserInfo;
 import com.example.demo.service.RegisterService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.web.savedrequest.SavedRequest;
+import org.springframework.security.web.util.RedirectUrlBuilder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,8 +31,9 @@ public class registerController {
      * @return the string
      */
     @GetMapping("/page")
-    public String registerPage () {
-        return "/registerPage.html";
+    public String registerPage (HttpServletRequest request) {
+        String url = (String) request.getSession().getAttribute("url");
+        return "redirect:/registerPage.html?url="+ url;
     }
 
 
@@ -41,9 +44,14 @@ public class registerController {
      * @return the string
      */
     @PostMapping("/user")
-    @ResponseBody
-    public String registerUser (UserInfo userInfo) {
-        return registerService.registerUser(userInfo);
+    public String registerUser (UserInfo userInfo,HttpServletRequest request) {
+        String url = (String) request.getSession().getAttribute("url");
+        Long id = registerService.registerUser(userInfo);
+        if (id != null) {
+           return "redirect:http://" +url;
+        } else {
+            return "redirect:/registerPage.html?url="+ url;
+        }
     }
 
     /**
@@ -60,6 +68,11 @@ public class registerController {
     @GetMapping("/key")
     @ResponseBody
     public String getKey (HttpServletRequest request) {
+        return registerService.getKey(request);
+    }
+    @GetMapping("/check")
+    @ResponseBody
+    public String check (HttpServletRequest request) {
         return registerService.getKey(request);
     }
 }
